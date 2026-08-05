@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="cs" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CZE SVK Riders | Analytika</title>
+    
+    <!-- Načtení Tailwind CSS pro profesionální design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Načtení Chart.js pro krásné grafy -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Nastavení vlastních barev pro Tailwind -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#ff4500' // Týmová oranžovo-červená
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen p-4 md:p-8 font-sans antialiased">
+    
+    <div class="max-w-6xl mx-auto">
+        <!-- Hlavička webu -->
+        <header class="mb-10 flex flex-col md:flex-row md:justify-between md:items-end border-b border-gray-700 pb-4">
+            <div>
+                <h1 class="text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500">
+                    CZE SVK Riders
+                </h1>
+                <p class="text-gray-400 mt-2 text-lg">Analytický portál Team Eventů</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <span class="px-4 py-2 bg-gray-800 border border-gray-700 rounded-full text-sm font-medium text-gray-300 shadow-sm">
+                    🟢 Status: Live
+                </span>
+            </div>
+        </header>
+        
+        <!-- Sekce s grafem -->
+        <div class="bg-gray-800 rounded-2xl shadow-2xl p-6 border border-gray-700">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-semibold text-gray-100">Top výkony - Poslední Event</h2>
+                <button class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm transition-colors duration-200">
+                    Detail eventu
+                </button>
+            </div>
+            
+            <!-- Kontejner pro samotný graf -->
+            <div class="relative h-96 w-full">
+                <canvas id="teamChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Zde začíná logika pro vykreslení grafu -->
+    <script>
+        // TESTOVACÍ DATA: Později zde bude funkce fetch(), která stáhne data z tvé Firebase.
+        // Simulujeme, co by bot vytáhl z obrázku.
+        const hraci = ['Vojters', 'Tommy', 'Drtič', 'Oaker YT', 'Marcus'];
+        const skore = [28500, 27100, 26800, 25000, 22400];
+
+        // Nastavení a vykreslení grafu
+        const ctx = document.getElementById('teamChart').getContext('2d');
+        
+        new Chart(ctx, {
+            type: 'bar', // Typ grafu: sloupcový
+            data: {
+                labels: hraci,
+                datasets: [{
+                    label: 'Dosažené skóre',
+                    data: skore,
+                    backgroundColor: 'rgba(239, 68, 68, 0.85)', // Profesionální poloprůhledná červená
+                    borderColor: 'rgba(239, 68, 68, 1)',
+                    borderWidth: 1,
+                    borderRadius: 6, // Zaoblené horní rohy sloupců pro moderní vzhled
+                    hoverBackgroundColor: 'rgba(234, 179, 8, 0.9)' // Změna barvy při najetí myší
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false // Schováme zbytečnou legendu
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(17, 24, 39, 0.95)', // Tmavý tooltip
+                        titleFont: { size: 14 },
+                        bodyFont: { size: 14, weight: 'bold' },
+                        padding: 12,
+                        cornerRadius: 8,
+                        displayColors: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)' // Velmi jemná mřížka na pozadí
+                        },
+                        ticks: { color: '#9ca3af' } // Šedá barva čísel
+                    },
+                    x: {
+                        grid: {
+                            display: false // Vypnutí svislých čar mřížky
+                        },
+                        ticks: { color: '#e5e7eb', font: { weight: 'bold' } }
+                    }
+                },
+                animation: {
+                    duration: 1500, // Plynulá úvodní animace (1.5 sekundy)
+                    easing: 'easeOutQuart'
+                }
+            }
+        });
+    </script>
+</body>
+</html>
