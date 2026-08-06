@@ -4,289 +4,166 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CZE SVK Riders | Pro Analytics</title>
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- FontAwesome pro profi ikonky -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
-                    colors: {
-                        brand: {
-                            500: '#ff4500',
-                            600: '#e03e00',
-                        },
-                        dark: {
-                            800: '#1e293b',
-                            900: '#0f172a',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-                    }
+                    colors: { brand: { 500: '#ff4500', 600: '#e03e00' }, dark: { 800: '#1e293b', 900: '#0f172a' } }
                 }
             }
         }
     </script>
 </head>
 <body class="bg-dark-900 text-slate-300 font-sans antialiased flex h-screen overflow-hidden">
-
-    <!-- Boční Sidebar -->
-    <aside class="w-64 bg-dark-800 border-r border-slate-700 hidden md:flex flex-col">
-        <div class="h-16 flex items-center px-6 border-b border-slate-700">
-            <h1 class="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-yellow-500 tracking-wider">
-                Riders Analytics
-            </h1>
-        </div>
-        <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-            <a href="#" class="flex items-center gap-3 px-4 py-3 bg-brand-500/10 text-brand-500 rounded-lg font-medium transition-colors">
-                <i class="fa-solid fa-chart-pie w-5 text-center"></i> Dashboard
-            </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-100 hover:bg-slate-800 rounded-lg font-medium transition-colors">
-                <i class="fa-solid fa-trophy w-5 text-center"></i> Team Eventy
-            </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-100 hover:bg-slate-800 rounded-lg font-medium transition-colors">
-                <i class="fa-solid fa-users w-5 text-center"></i> Hráči
-            </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-slate-100 hover:bg-slate-800 rounded-lg font-medium transition-colors">
-                <i class="fa-solid fa-gear w-5 text-center"></i> Nastavení bota
-            </a>
-        </nav>
-        <div class="p-4 border-t border-slate-700">
-            <div class="flex items-center gap-3 px-4 py-2">
-                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-500 to-yellow-500 flex items-center justify-center text-white font-bold text-sm">
-                    VB
-                </div>
-                <div>
-                    <p class="text-sm font-semibold text-white">Vojtěch</p>
-                    <p class="text-xs text-slate-400">Admin</p>
-                </div>
-            </div>
-        </div>
-    </aside>
-
-    <!-- Hlavní obsah -->
-    <main class="flex-1 flex flex-col h-screen overflow-hidden">
-        <!-- Horní lišta -->
-        <header class="h-16 bg-dark-800/50 backdrop-blur-md border-b border-slate-700 flex items-center justify-between px-6 z-10">
-            <h2 class="text-lg font-semibold text-white">Přehled za posledních 30 dní</h2>
-            <div class="flex items-center gap-4">
-                <span class="flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    Firebase Live
-                </span>
-            </div>
+    
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto">
+        <header class="h-16 bg-dark-800/50 backdrop-blur-md border-b border-slate-700 flex items-center justify-between px-6 z-10 shrink-0">
+            <h2 class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-yellow-500">CZE SVK Riders Analytics</h2>
+            <span class="flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Firebase Live
+            </span>
         </header>
 
-        <!-- Scrollovací zóna s obsahem -->
-        <div class="flex-1 overflow-y-auto p-6 space-y-6">
-            
-            <!-- Statistiky (Cards) -->
+        <div class="p-6 space-y-6">
+            <!-- Statistiky (Karty) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-dark-800 p-5 rounded-2xl border border-slate-700 shadow-lg">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <p class="text-sm font-medium text-slate-400">Odehrané Eventy</p>
-                            <h3 class="text-3xl font-bold text-white mt-1">12</h3>
-                        </div>
-                        <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-500">
-                            <i class="fa-solid fa-gamepad"></i>
-                        </div>
-                    </div>
-                    <p class="text-xs text-emerald-400 mt-3 font-medium"><i class="fa-solid fa-arrow-trend-up mr-1"></i> +2 oproti minulému měsíci</p>
+                    <p class="text-sm font-medium text-slate-400">Průměrné Skóre Týmu</p>
+                    <h3 id="avg-score" class="text-3xl font-bold text-white mt-1">---</h3>
                 </div>
-                
                 <div class="bg-dark-800 p-5 rounded-2xl border border-slate-700 shadow-lg">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <p class="text-sm font-medium text-slate-400">Průměrné Skóre Týmu</p>
-                            <h3 class="text-3xl font-bold text-white mt-1">42,500</h3>
-                        </div>
-                        <div class="w-10 h-10 rounded-lg bg-brand-500/10 flex items-center justify-center text-brand-500">
-                            <i class="fa-solid fa-crosshairs"></i>
-                        </div>
-                    </div>
-                    <p class="text-xs text-emerald-400 mt-3 font-medium"><i class="fa-solid fa-arrow-trend-up mr-1"></i> +5.2% nárůst</p>
+                    <p class="text-sm font-medium text-slate-400">Odehrané Eventy</p>
+                    <h3 id="total-events" class="text-3xl font-bold text-white mt-1">---</h3>
                 </div>
-
                 <div class="bg-dark-800 p-5 rounded-2xl border border-slate-700 shadow-lg">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <p class="text-sm font-medium text-slate-400">MVP Měsíce</p>
-                            <h3 class="text-xl font-bold text-white mt-1">Tommy</h3>
-                            <p class="text-sm font-medium text-brand-500">28,950 pts avg</p>
-                        </div>
-                        <div class="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center text-yellow-500">
-                            <i class="fa-solid fa-crown"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Grafová sekce -->
-            <div class="bg-dark-800 p-6 rounded-2xl border border-slate-700 shadow-lg">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-lg font-bold text-white" id="graf-nadpis">Výkonnost: Aktuální Liga</h3>
-                </div>
-                <div class="relative h-72 w-full">
-                    <canvas id="mainChart"></canvas>
+                    <p class="text-sm font-medium text-slate-400">Win Rate</p>
+                    <h3 id="win-rate" class="text-3xl font-bold text-brand-500 mt-1">---</h3>
                 </div>
             </div>
 
             <!-- Tabulka historie eventů -->
-            <div class="bg-dark-800 rounded-2xl border border-slate-700 shadow-lg overflow-hidden flex flex-col">
-                <div class="p-6 border-b border-slate-700 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <h3 class="text-lg font-bold text-white">Historie Team Eventů</h3>
-                    
-                    <!-- Filtry -->
-                    <div class="flex gap-2">
-                        <select id="sortFilter" onchange="sortData()" class="bg-dark-900 border border-slate-600 text-slate-300 text-sm rounded-lg focus:ring-brand-500 focus:border-brand-500 block p-2.5 outline-none">
-                            <option value="newest">Nejnovější</option>
-                            <option value="best">Nejlepší výsledek</option>
-                            <option value="worst">Nejhorší výsledek</option>
-                        </select>
-                    </div>
+            <div class="bg-dark-800 rounded-2xl border border-slate-700 shadow-lg overflow-hidden">
+                <div class="p-6 border-b border-slate-700">
+                    <h3 class="text-lg font-bold text-white">Historie Zápasů a Soupiska</h3>
                 </div>
                 
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left text-slate-400">
                         <thead class="text-xs text-slate-300 uppercase bg-dark-900/50 border-b border-slate-700">
                             <tr>
-                                <th scope="col" class="px-6 py-4">Datum</th>
-                                <th scope="col" class="px-6 py-4">Soupeř</th>
-                                <th scope="col" class="px-6 py-4 text-center">Naše Skóre</th>
-                                <th scope="col" class="px-6 py-4 text-center">Výsledek</th>
-                                <th scope="col" class="px-6 py-4">Top Hráč</th>
+                                <th class="px-6 py-4">Datum</th>
+                                <th class="px-6 py-4">Soupeř</th>
+                                <th class="px-6 py-4 text-center">Náš Tým</th>
+                                <th class="px-6 py-4 text-center">Výsledek</th>
+                                <th class="px-6 py-4 text-center">Hráči</th>
                             </tr>
                         </thead>
                         <tbody id="tableBody" class="divide-y divide-slate-700/50">
-                            <!-- Zde se javascriptem vykreslí řádky -->
+                            <!-- JS sem vloží data -->
                         </tbody>
                     </table>
                 </div>
             </div>
-            
         </div>
     </main>
 
+    <!-- Skrytý Modal pro zobrazení 50 hráčů -->
+    <div id="playersModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 p-4">
+        <div class="bg-dark-800 rounded-2xl border border-slate-700 shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col">
+            <div class="p-4 border-b border-slate-700 flex justify-between items-center">
+                <h3 id="modalTitle" class="text-lg font-bold text-white">Soupiska</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div class="p-4 overflow-y-auto flex-1">
+                <table class="w-full text-sm text-left text-slate-300">
+                    <thead class="text-xs uppercase bg-dark-900/50 border-b border-slate-700">
+                        <tr><th class="py-2 px-4">#</th><th class="py-2 px-4">Jméno</th><th class="py-2 px-4 text-right">Skóre</th></tr>
+                    </thead>
+                    <tbody id="modalBody" class="divide-y divide-slate-700/50"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // --- 1. ČÁST: GRAF Z FIREBASE ---
-        let myChart = null;
+        let globalEventsData = [];
 
         fetch('https://riders-league-bot-default-rtdb.europe-west1.firebasedatabase.app/data.json')
             .then(res => res.json())
             .then(data => {
-                let hraci = [];
-                let skore = [];
-                
-                if (data && data.scores) {
-                    hraci = Object.keys(data.scores);
-                    skore = Object.values(data.scores);
-                    if(data.mapa && data.auto) {
-                        document.getElementById('graf-nadpis').innerText = `Živě: Riders League - ${data.mapa} (${data.auto})`;
-                    }
-                } else {
-                    hraci = ['Čekání na data'];
-                    skore = [0];
+                if (data && data.team_events) {
+                    globalEventsData = data.team_events.sort((a, b) => b.id - a.id); // Od nejnovějšího
+                    renderDashboard(globalEventsData);
                 }
+            })
+            .catch(err => console.error("Chyba DB:", err));
 
-                const ctx = document.getElementById('mainChart').getContext('2d');
-                
-                // Místo obyčejných sloupců uděláme hladkou křivku podbarvenou přechodem
-                let gradient = ctx.createLinearGradient(0, 0, 0, 400);
-                gradient.addColorStop(0, 'rgba(255, 69, 0, 0.5)'); // brand color
-                gradient.addColorStop(1, 'rgba(255, 69, 0, 0.0)');
-
-                myChart = new Chart(ctx, {
-                    type: 'line', 
-                    data: {
-                        labels: hraci,
-                        datasets: [{
-                            label: 'Dosažené skóre',
-                            data: skore,
-                            borderColor: '#ff4500',
-                            backgroundColor: gradient,
-                            borderWidth: 3,
-                            pointBackgroundColor: '#fff',
-                            pointBorderColor: '#ff4500',
-                            pointBorderWidth: 2,
-                            pointRadius: 4,
-                            pointHoverRadius: 6,
-                            fill: true,
-                            tension: 0.4 // Zakřivení čáry
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            y: { grid: { color: 'rgba(255, 255, 255, 0.05)' } },
-                            x: { grid: { display: false } }
-                        }
-                    }
-                });
-            });
-
-        // --- 2. ČÁST: TABULKA A FILTROVÁNÍ EVENTŮ ---
-        // Budoucí struktura pro ukládání historie. Zatím testovací data.
-        let eventHistory = [
-            { id: 1, date: "02.08.2026", opponent: "Team Alpha", score: 48500, win: true, topPlayer: "Tommy" },
-            { id: 2, date: "26.07.2026", opponent: "Speed Demons", score: 41200, win: false, topPlayer: "Vojters" },
-            { id: 3, date: "19.07.2026", opponent: "Night Riders", score: 52100, win: true, topPlayer: "Jack_420" },
-            { id: 4, date: "12.07.2026", opponent: "Elite Squad", score: 38900, win: false, topPlayer: "Marcus.4W" },
-            { id: 5, date: "05.07.2026", opponent: "Mud Crawlers", score: 45000, win: true, topPlayer: "Oaker YT" }
-        ];
-
-        function renderTable(data) {
+        function renderDashboard(events) {
             const tbody = document.getElementById('tableBody');
-            tbody.innerHTML = ""; // Vyčištění tabulky
-            
-            data.forEach(event => {
-                const statusBadge = event.win 
-                    ? `<span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-1 rounded-md text-xs font-bold">VÝHRA</span>`
-                    : `<span class="bg-red-500/10 text-red-400 border border-red-500/20 px-2.5 py-1 rounded-md text-xs font-bold">PROHRA</span>`;
+            tbody.innerHTML = "";
+            let totalScore = 0, wins = 0;
 
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-dark-900/50 transition-colors group";
-                tr.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap text-white font-medium">${event.date}</td>
-                    <td class="px-6 py-4 whitespace-nowrap flex items-center gap-3">
-                        <div class="w-8 h-8 rounded bg-slate-700 flex items-center justify-center text-xs text-white">
-                            <i class="fa-solid fa-shield"></i>
-                        </div>
-                        ${event.opponent}
-                    </td>
-                    <td class="px-6 py-4 text-center text-white font-bold">${event.score.toLocaleString()}</td>
-                    <td class="px-6 py-4 text-center">${statusBadge}</td>
-                    <td class="px-6 py-4 text-brand-400 font-semibold"><i class="fa-solid fa-star text-yellow-500 mr-2 text-xs"></i>${event.topPlayer}</td>
+            events.forEach((event, index) => {
+                totalScore += event.score || 0;
+                if(event.win) wins++;
+
+                const winBadge = event.win 
+                    ? `<span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-1 rounded text-xs font-bold">VÝHRA</span>`
+                    : `<span class="bg-red-500/10 text-red-400 border border-red-500/20 px-2 py-1 rounded text-xs font-bold">PROHRA</span>`;
+
+                const btn = (event.nas_tym_detaily && event.nas_tym_detaily.length > 0)
+                    ? `<button onclick="openModal(${index})" class="bg-brand-500 hover:bg-brand-600 text-white px-3 py-1.5 rounded-lg text-xs transition">Ukázat ${event.nas_tym_detaily.length} hráčů</button>`
+                    : `<span class="text-xs text-slate-500">Žádná data</span>`;
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-dark-900/50">
+                        <td class="px-6 py-4 text-white font-medium">${event.date || '-'}</td>
+                        <td class="px-6 py-4">${event.opponent || '-'}</td>
+                        <td class="px-6 py-4 text-center font-bold">${(event.score || 0).toLocaleString()}</td>
+                        <td class="px-6 py-4 text-center">${winBadge}</td>
+                        <td class="px-6 py-4 text-center">${btn}</td>
+                    </tr>
                 `;
-                tbody.appendChild(tr);
             });
-        }
 
-        // Funkce pro filtr/řazení
-        function sortData() {
-            const filter = document.getElementById('sortFilter').value;
-            let sortedData = [...eventHistory];
-
-            if (filter === 'best') {
-                sortedData.sort((a, b) => b.score - a.score); // Od nejvyššího čísla
-            } else if (filter === 'worst') {
-                sortedData.sort((a, b) => a.score - b.score); // Od nejnižšího
-            } else if (filter === 'newest') {
-                sortedData.sort((a, b) => b.id - a.id); // Původní řazení (id simuluje čas)
+            document.getElementById('total-events').innerText = events.length;
+            if(events.length > 0) {
+                document.getElementById('avg-score').innerText = Math.round(totalScore / events.length).toLocaleString();
+                document.getElementById('win-rate').innerText = Math.round((wins / events.length) * 100) + ' %';
             }
-
-            renderTable(sortedData);
         }
 
-        // Úvodní vykreslení tabulky
-        renderTable(eventHistory);
+        function openModal(index) {
+            const event = globalEventsData[index];
+            document.getElementById('modalTitle').innerText = `Soupiska vs ${event.opponent}`;
+            const mBody = document.getElementById('modalBody');
+            mBody.innerHTML = "";
+            
+            // Seřazení hráčů od nejlepšího
+            const hraci = event.nas_tym_detaily.sort((a, b) => b.skore - a.skore);
+            
+            hraci.forEach((hrac, i) => {
+                mBody.innerHTML += `
+                    <tr>
+                        <td class="py-2 px-4 text-slate-500">${i + 1}.</td>
+                        <td class="py-2 px-4 font-medium text-white">${hrac.jmeno}</td>
+                        <td class="py-2 px-4 text-right text-brand-400 font-bold">${hrac.skore.toLocaleString()}</td>
+                    </tr>
+                `;
+            });
+            
+            document.getElementById('playersModal').classList.remove('hidden');
+            document.getElementById('playersModal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('playersModal').classList.add('hidden');
+            document.getElementById('playersModal').classList.remove('flex');
+        }
     </script>
 </body>
 </html>
