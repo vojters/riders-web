@@ -1,0 +1,15 @@
+{
+  "team_event": "Art of Flight",
+  "our_team": "CZE⚡SVK Riders",
+  "opponent_team": "Seleção BRA",
+  "our_team_score": 1159,
+  "opponent_score": 3356,
+  "winner": "opponent",
+  "players": [
+    { "position": 1, "name": "WRF", "points": 300, "score": 75000 },
+    { "position": 2, "name": "NH|BøssPH™", "points": 280, "score": 75000 },
+    { "position": 3, "name": "oyasumi", "points": 262, "score": 75000 }
+  ],
+  "event_date": "2026-08-28",
+  "season": "2026-08"
+}
